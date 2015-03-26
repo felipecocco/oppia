@@ -28,8 +28,9 @@
 {% block local_top_nav_options %}
   <div ng-controller="LearnerLocalNav">
     <span ng-if="isLoggedIn" class="nav navbar-nav oppia-navbar-breadcrumb" style="padding: 18px 20px 15px 20px" tooltip="Rate exploration" tooltip-placement="bottom">
-      <rating-from-value rating-value="userRating" is-editable="true" on-edit="submitUserRating"></rating-from-value>
+      <rating-from-value rating-value="userRating" is-editable="true" on-edit="submitUserRating" on-click="showFeedbackModal"></rating-from-value>
     </span>
+
     <ul class="nav navbar-nav oppia-navbar-nav navbar-right" ng-controller="LearnerLocalNav" style="margin-right: 0px;">
       <li class="dropdown">
         <a href="" tooltip="Share" tooltip-placement="left" class="dropdown-toggle oppia-share-dropdown-toggle" data-toggle="dropdown">
@@ -80,7 +81,7 @@
     <div class="modal-header">
       <h3>
         <span ng-if="!stateName">
-          Give Feedback on this Exploration
+          Give Feedback
         </span>
         <span ng-if="stateName">
           Give Feedback on this Card
@@ -91,18 +92,20 @@
     <div class="modal-body">
       <p>
         <em>
-          The feedback you write here will be sent to the editors of this exploration.
-          To give general feedback about Oppia, please use the <a href="https://code.google.com/p/oppia/issues/list"> bug tracker</a> or <a href="https://groups.google.com/forum/?fromgroups#!forum/oppia-dev">Google Group</a> instead. Thanks in advance!
+          Your feedback will be passed along to the authors of this exploration.
+          Thanks for helping to improve this exploration for others!
         </em>
       </p>
 
       <div role="form">
+        <!--
         <div class="form-group">
           <label for="subject">Subject</label>
           <input type="text" class="form-control" id="subject" ng-model="subject">
         </div>
+        -->
         <label for="feedback">Feedback</label>
-        <textarea id="feedback" class="form-control" ng-model="feedback" rows="6" cols="200" placeholder="Please write your feedback or suggestions for the exploration editors here."></textarea>
+        <textarea autofocus="true" id="feedback" class="form-control" ng-model="feedback" rows="6" cols="200" placeholder="If you have feedback for the exploration authors, please write it here."></textarea>
         <div ng-show="isLoggedIn">
           <hr>
           <div class="checkbox">
@@ -117,7 +120,7 @@
 
     <div class="modal-footer">
       <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-      <button class="btn btn-success" ng-click="submit(subject, feedback, isSubmitterAnonymized)" ng-disabled="!feedback">Submit</button>
+      <button class="btn btn-success" ng-click="submit(subject, feedback, isSubmitterAnonymized)" ng-disabled="!feedback">Send Feedback</button>
     </div>
   </script>
 

@@ -33,7 +33,8 @@ oppia.directive('ratingFromValue', [function() {
     scope: {
       ratingValue: '=',
       isEditable: '=',
-      onEdit: '='
+      onEdit: '=',
+      onClick: '='
     },
     templateUrl: 'rating/fromValue',
     controller: ['$scope', function($scope) {
@@ -75,6 +76,10 @@ oppia.directive('ratingFromValue', [function() {
           $scope.ratingValue = starValue;
           displayValue(starValue);
           $scope.onEdit(starValue);
+
+          if ($scope.onClick) {
+            $scope.onClick();
+          }
         }
       };
       $scope.enterStar = function(starValue) {
